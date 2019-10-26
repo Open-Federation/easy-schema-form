@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "DEMO=true NODE_ENV=development webpack-dev-server --mode development --open",
-    "build": "NODE_ENV=production  webpack --mode production",
+    "build": "NODE_ENV=development  webpack --mode development",
     "prepublishOnly": "npm run release",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -p",
     "changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
@@ -14,6 +14,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hellosean1025/jsf.git"
+  },
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "antd": "^3.24.2",
+    "brace": "^0.11.1",
+    "immer": "^4.0.2",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   },
   "author": "hellosean1025",
   "devDependencies": {
@@ -48,7 +58,6 @@
     "node-sass": "4.9.0",
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",
-    "react-dom": "^16.11.0",
     "sass-loader": "^7.0.1",
     "semver": "^5.5.1",
     "shelljs": "^0.8.2",
@@ -65,12 +74,5 @@
   "bugs": {
     "url": "https://github.com/hellosean1025/jsf.js/issues"
   },
-  "homepage": "https://github.com/hellosean1025/jsf.js#readme",
-  "dependencies": {
-    "ajv": "^6.10.2",
-    "antd": "^3.24.2",
-    "brace": "^0.11.1",
-    "immer": "^4.0.2",
-    "react": "^16.11.0"
-  }
+  "homepage": "https://github.com/hellosean1025/jsf.js#readme"
 }

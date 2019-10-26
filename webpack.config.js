@@ -29,16 +29,16 @@ const plugins = [
   }),
 ]
 
-const externals =  [
-  { react: { commonjs: "react", commonjs2: "react",amd: 'react', root: ['React'] } },
-  { lodash: { commonjs: "lodash", commonjs2: "lodash",amd:'lodash' } },
-  { brace: { commonjs: "brace", commonjs2: "brace", amd: 'brace', root: ['ace'] } },
-  { "react-dom": { commonjs: "react-dom", commonjs2: "react-dom", amd: 'react-dom', root: ['ReactDom'] } },
-  { "prop-types": { commonjs: "prop-types", commonjs2: "prop-types",amd: 'prop-types' } },
-  { antd: { commonjs: "antd", commonjs2: "antd", amd: 'antd' } },
-  {immer: { commonjs: "immer", commonjs2: "immer", amd: 'immer' } },
-  {ajv: { commonjs: "ajv", commonjs2: "ajv", amd: 'ajv' } }
-]
+const externals =  {
+  react: 'react',
+  lodash: 'lodash',
+  brace: 'brace',
+  "react-dom": "react-dom",
+  "prop-types": "prop-types",
+  antd: 'antd',
+  immer: 'immer',
+  ajv: 'ajv'
+}
 
 const entry = isDemo ? './index.js' : './src/index.js'
 
@@ -106,6 +106,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve (__dirname, 'dist'),
+    libraryTarget: "umd",
   },
 
   resolve: {

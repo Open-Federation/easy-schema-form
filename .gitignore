@@ -12,3 +12,4 @@ docs.yml
 .cache
 .nyc_output
 coverage
+package-lock.json
