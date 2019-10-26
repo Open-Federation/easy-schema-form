@@ -1,9 +1,7 @@
 const path = require ('path');
-const webpack = require ('webpack');
 const HtmlWebpackPlugin = require ('html-webpack-plugin');
-const devFlagPlugin = new webpack.DefinePlugin ({});
 const MiniCssExtractPlugin = require ('mini-css-extract-plugin');
-
+const isDemo = process.env.DEMO === 'true'
 
 const CleanWebpackPlugin = require ('clean-webpack-plugin');
 
@@ -19,7 +17,30 @@ const loaders = {
   ],
 };
 
-const entry = './index.js'
+const plugins = [
+  new CleanWebpackPlugin ([path.resolve (__dirname, 'dist')]),
+  new MiniCssExtractPlugin ({
+    filename: '[name].css',
+    chunkFilename: '[id].css',
+  }),
+  new HtmlWebpackPlugin ({
+    template: path.resolve (__dirname, 'index.html'),
+    filename: path.resolve (__dirname, 'dist/index.html')
+  }),
+]
+
+const externals =  [
+  { react: { commonjs: "react", commonjs2: "react",amd: 'react', root: ['React'] } },
+  { lodash: { commonjs: "lodash", commonjs2: "lodash",amd:'lodash' } },
+  { brace: { commonjs: "brace", commonjs2: "brace", amd: 'brace', root: ['ace'] } },
+  { "react-dom": { commonjs: "react-dom", commonjs2: "react-dom", amd: 'react-dom', root: ['ReactDom'] } },
+  { "prop-types": { commonjs: "prop-types", commonjs2: "prop-types",amd: 'prop-types' } },
+  { antd: { commonjs: "antd", commonjs2: "antd", amd: 'antd' } },
+  {immer: { commonjs: "immer", commonjs2: "immer", amd: 'immer' } },
+  {ajv: { commonjs: "ajv", commonjs2: "ajv", amd: 'ajv' } }
+]
+
+const entry = isDemo ? './index.js' : './src/index.js'
 
 Object.keys (loaders).forEach (item => {
   loaders[item].unshift (MiniCssExtractPlugin.loader);
@@ -75,16 +96,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin ([path.resolve (__dirname, 'dist')]),
-    devFlagPlugin,
+  plugins: isDemo &&  plugins || [
     new MiniCssExtractPlugin ({
       filename: '[name].css',
       chunkFilename: '[id].css',
-    }),
-    new HtmlWebpackPlugin ({
-      template: path.resolve (__dirname, 'index.html'),
-      filename: path.resolve (__dirname, 'dist/index.html')
     }),
   ],
   entry,
@@ -106,13 +121,5 @@ module.exports = {
     host: '127.0.0.1',
     historyApiFallback: true
   },
-  externals: [
-    { react: { commonjs: "react", commonjs2: "react",amd: 'react', root: ['React'] } },
-    { lodash: { commonjs: "lodash", commonjs2: "lodash",amd:'lodash' } },
-    { brace: { commonjs: "brace", commonjs2: "brace", amd: 'brace', root: ['ace'] } },
-    { "react-dom": { commonjs: "react-dom", commonjs2: "react-dom", amd: 'react-dom', root: ['ReactDom'] } },
-    { "prop-types": { commonjs: "prop-types", commonjs2: "prop-types",amd: 'prop-types' } },
-    { antd: { commonjs: "antd", commonjs2: "antd", amd: 'antd' } },
-    {immer: { commonjs: "immer", commonjs2: "immer", amd: 'immer' } }
-  ]
+  externals : isDemo ? [] : externals
 };

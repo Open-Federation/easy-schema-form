@@ -1,12 +1,15 @@
 {
   "name": "jsf.js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --mode development --open",
+    "start": "DEMO=true NODE_ENV=development webpack-dev-server --mode development --open",
     "build": "NODE_ENV=production  webpack --mode production",
-    "demo": "NODE_ENV=development webpack-dev-server --mode development --open"
+    "prepublishOnly": "npm run release",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -p",
+    "changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
+    "release": "./release.sh"
   },
   "repository": {
     "type": "git",
@@ -14,9 +17,7 @@
   },
   "author": "hellosean1025",
   "devDependencies": {
-    "antd": "^3.24.2",
     "autoprefixer": "^7.2.6",
-    "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.5",
@@ -66,6 +67,8 @@
   },
   "homepage": "https://github.com/hellosean1025/jsf.js#readme",
   "dependencies": {
+    "ajv": "^6.10.2",
+    "antd": "^3.24.2",
     "brace": "^0.11.1",
     "immer": "^4.0.2",
     "react": "^16.11.0"

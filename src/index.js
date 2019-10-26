@@ -5,9 +5,10 @@ import produce from 'immer';
 import ObjectSchemaForm from './object-schema-form';
 import ArraySchemaForm from './array-schema-form'
 import {Button} from 'antd'
-import 'antd/dist/antd.css'
 import './index.scss'
 import getName from  './locale'
+const Ajv = require('ajv');
+const ajv = new Ajv();
 
 function getData(state, keys) {
   try{
@@ -36,9 +37,6 @@ function getParentKeys(keys) {
   arr.splice(keys.length - 1, 1);
   return arr;
 }
-
-const Ajv = require('ajv');
-const ajv = new Ajv();
 
 export default class JsonSchemaForm extends React.PureComponent {
   constructor (props) {
