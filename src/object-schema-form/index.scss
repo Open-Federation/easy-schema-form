@@ -1,0 +1,24 @@
+.object-schema-form{
+  margin-right: 10px;
+  .object-schema-form-item{
+    display: flex;
+    margin: 10px 8px;
+    .item-label{
+      flex: none;
+      width: 100px;
+    }
+    .item-wrap{
+      flex: 1;
+    }
+
+    .error-message{
+      color: red;
+    }
+
+    .ant-select{
+      width: 100%;
+    }
+  }
+
+
+}

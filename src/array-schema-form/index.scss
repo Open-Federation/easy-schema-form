@@ -1,0 +1,44 @@
+.array-field-form{
+  margin-right: 10px;
+  .header{
+    display: flex;
+    .title{
+      flex: 1;
+    }
+    .add-button{
+      flex: none;
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .fast-edit{
+      flex: none;
+      margin-right: 10px;
+    }
+  }
+  .array-field-form-table{
+    .error-message{
+      color: red;
+    }
+    .setting-column-item{
+      .anticon{
+        cursor: pointer;
+        margin-right: 10px;
+      }
+    }
+    .setting-column-item-drag{
+      cursor: move;
+    }
+  }
+}
+
+.array-schema-form-adv-modal{
+  min-height: 500px;
+}
+
+.array-schema-form-fast-edit{
+  min-height: 500px;
+  textarea{
+    height: 500px;
+  }
+}

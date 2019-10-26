@@ -1,0 +1,14 @@
+node_modules
+dist
+_site
+_build/docs_serve/
+.idea/
+_build
+docs.yml
+.DS_Store
+.history
+.runtime
+.vscode
+.cache
+.nyc_output
+coverage
