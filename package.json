@@ -6,7 +6,7 @@
   "scripts": {
     "start": "DEMO=true NODE_ENV=development webpack-dev-server --mode development --open",
     "build": "NODE_ENV=development  webpack --mode development",
-    "demo": "DEMO=true NODE_ENV=development  webpack --mode development",
+    "demo": "DEMO=true NODE_ENV=production  webpack --mode production",
     "prepublishOnly": "npm run release",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -p",
     "changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
