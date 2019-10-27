@@ -7,7 +7,10 @@ import withContext from '../withContext'
 import {getErrorMessage, getComponent, schemaHander} from '../utils'
 import ObjectSchemaForm from './'
 import FieldComponent from '../fields'
-import {Tooltip, Icon} from 'antd'
+import {Tooltip, Icon, Tabs} from 'antd'
+import getName from '../locale'
+
+const defaultGroup = getName('default_group_name')
 
 @withContext(GlobalStoreContext)
 export default  class _ObjectSchemaForm extends React.PureComponent{
@@ -67,63 +70,90 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
     </div>
   }
 
+  getMulitSchema(schema){
+    const schemas = {}
+    Object.keys(schema.properties).forEach(key=>{
+      let item = schema.properties[key];
+      let categoryName = item.categoryName || defaultGroup;
+      schemas[categoryName] = schemas[categoryName] || {
+        ...schema,
+        properties: {}
+      };
+      schemas[categoryName].properties[key] = item;
+    })
+    return schemas;
+  }
+
   render(){
-    const {value, schema, dataPath, __context} = this.props;
-    const {store} = __context;
-
-    const {properties} = schema;
+    const {schema} = this.props;
+    const mulitSchems = this.getMulitSchema(schema);
+    const keys = Object.keys(mulitSchems);
     return <div className="object-schema-form">
-      {Object.keys(properties).map(key=>{
-        const itemInfo = properties[key];
-      
-        let C = FieldComponent;
-
-        const schema = schemaHander(itemInfo, {
-          record: this.props.value,
-          formData: store.value,
-        })
-
-        const ui = (schema.ui || {});
-
-        if(ui.hide)return null;
-
-        if(itemInfo.type === 'array' && itemInfo.items && itemInfo.items.type === 'object'){
-          C = ArraySchemaForm;
-        }else if(itemInfo.type === 'object'){
-          C = ObjectSchemaForm;
-        }else{
-          C = getComponent(FieldComponent, itemInfo);
-        }
-        
-        const {validateResult} = store;
-        let errorMessage = getErrorMessage([...this.props.dataPath, key], validateResult)
-        let isRequired = false;
-
-        if(Array.isArray(schema.required) && schema.required.indexOf(key) !== -1){
-          isRequired = true;
-        }
-
-        const el = <C
-          {...ui.options}
-          default={itemInfo.default} 
-          value={value[key]} 
-          onChange={this.handleChange(key)} 
-          schema={itemInfo} 
-          dataPath={[...dataPath, key]}
-          onBlur={this.props.onBlur}
-        />
-
-        const objectKeyRender = this._ObjectKeyRender(key);
-
-        return objectKeyRender({
-          schema: itemInfo,
-          el,
-          errorMessage,
-          isRequired,
-          type: 'object-item'
-        })
-      })}
+      {keys.length > 1 && <Tabs defaultActiveKey="1" >
+        {keys.map(key=>
+          <Tabs.TabPane tab={key} key={key}>
+            {this.renderSchema(mulitSchems[key])}
+          </Tabs.TabPane>
+        )}
+      </Tabs>}
+      {keys.length === 1 && this.renderSchema(mulitSchems[keys[0]])}
       
     </div>
+  }
+
+  renderSchema(schema){
+    const {properties} = schema;
+    return Object.keys(properties).map(key=>{
+      const {value, dataPath, __context} = this.props;
+      const {store} = __context;
+      const itemInfo = properties[key];
+        
+      let C = FieldComponent;
+
+      const schema = schemaHander(itemInfo, {
+        record: this.props.value,
+        formData: store.value,
+      })
+
+      const ui = (schema.ui || {});
+
+      if(ui.hide)return null;
+
+      if(itemInfo.type === 'array' && itemInfo.items && itemInfo.items.type === 'object'){
+        C = ArraySchemaForm;
+      }else if(itemInfo.type === 'object'){
+        C = ObjectSchemaForm;
+      }else{
+        C = getComponent(FieldComponent, itemInfo);
+      }
+      
+      const {validateResult} = store;
+      let errorMessage = getErrorMessage([...this.props.dataPath, key], validateResult)
+      let isRequired = false;
+
+      if(Array.isArray(schema.required) && schema.required.indexOf(key) !== -1){
+        isRequired = true;
+      }
+
+      const el = <C
+        {...ui.options}
+        default={itemInfo.default} 
+        value={value[key]} 
+        onChange={this.handleChange(key)} 
+        schema={itemInfo} 
+        dataPath={[...dataPath, key]}
+        onBlur={this.props.onBlur}
+      />
+
+      const objectKeyRender = this._ObjectKeyRender(key);
+
+      return objectKeyRender({
+        schema: itemInfo,
+        el,
+        errorMessage,
+        isRequired,
+        type: 'object-item'
+      })
+    })
   }
 }

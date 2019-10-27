@@ -40,7 +40,7 @@ const externals =  {
   ajv: 'ajv'
 }
 
-const entry = isDemo ? './index.js' : './src/index.js'
+const entry = isDemo ? './examples/index.js' : './src/index.js'
 
 Object.keys (loaders).forEach (item => {
   loaders[item].unshift (MiniCssExtractPlugin.loader);

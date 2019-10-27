@@ -4,5 +4,6 @@
   "quick-edit": "Quick-Edits",
   "add": "Append",
   "delete": "Delete",
-  "delete-array-item": "Are you sure delete this?"
+  "delete-array-item": "Are you sure delete this?",
+  "default_group_name": "General"
 }

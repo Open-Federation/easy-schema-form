@@ -1,0 +1,23 @@
+.container{
+  .header-box{
+
+  }
+
+  .body-box{
+    display: flex;
+    .body-left{
+      flex: none;
+      width: 400px;
+      margin-right: 20px;
+      border-right: 1px solid #000;
+
+      .json-editor{
+        height: 500px
+      }
+    }
+
+    .body-right{
+      flex: 1
+    }
+  }
+}

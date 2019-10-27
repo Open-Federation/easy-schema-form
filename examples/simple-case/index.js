@@ -1,9 +1,4 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import 'antd/dist/antd.css'
-import JSF from './src'
-
-const schema = {
+export default {
   type: "object",
   required: ['name'],
   properties: {
@@ -74,29 +69,38 @@ const schema = {
           }
         }
       }
+    },
+    
+    tabTest: {
+      type: "array",
+      title: "",
+      categoryName: "newTab",
+      items: {
+        type: "object",
+        advFields: ['code'],
+        properties: {
+          dataIndex: {
+            type: "string",
+            title: 'Field',
+            pattern: "[0-9]+"
+          },
+          title: {
+            type: "string",
+            title: 'Title'
+          },
+          enable: {
+            type: "boolean",
+            title: 'Enable'
+          },
+          code: {
+            type: "string",
+            title: "Script",
+            ui: {
+              type: 'CodeEditor'
+            }
+          }
+        }
+      }
     }
   }
 }
-
-
-
-export default class App extends React.PureComponent {
-  state = {
-    data: {}
-  };
-
-  onChange =(value)=>{
-    this.setState({
-      data: value
-    })
-  }
-
-  render () {
-    return (
-      <JSF onChange={this.onChange} value={this.state.data} schema={schema} />
-    );
-  }
-}
-
-
-ReactDom.render(<App />, document.getElementById('root'))
