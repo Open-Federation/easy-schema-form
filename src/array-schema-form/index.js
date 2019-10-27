@@ -94,6 +94,12 @@ export default class ArrayFieldForm extends React.PureComponent {
       modalVisible: false,
       fastEditModalVisible: false
     };
+
+    const {__context, dataPath, value} = this.props;
+    const {setValueByPath} = __context;
+    if(!value || !Array.isArray(value)){
+      setValueByPath([...dataPath], [])
+    }
   }
 
   static propTypes = {
@@ -107,7 +113,6 @@ export default class ArrayFieldForm extends React.PureComponent {
 
   static defaultProps = {
     dataPath: [],
-    value: []
   }
 
   handleChange = (key, index) => e => {
@@ -134,8 +139,8 @@ export default class ArrayFieldForm extends React.PureComponent {
     if(!data){
       const {__context, dataPath} = this.props;
       const {setValueByPath} = __context;
-      const paths = [...dataPath]
-      setValueByPath(paths, [{}])
+      const paths = [...dataPath, 0]
+      setValueByPath(paths, {})
     }
   }
 
@@ -419,6 +424,9 @@ export default class ArrayFieldForm extends React.PureComponent {
 
   render () {
     const {uniqueField, schema, value = []} = this.props;
+    if(!Array.isArray(value)){
+      return null;
+    }
     const columns = this.getColumns (schema);
     return (
       <div  className="array-field-form">

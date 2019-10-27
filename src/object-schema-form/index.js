@@ -25,9 +25,17 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
   }
 
   static defaultProps = {
-    value: {},
     dataPath: [],
     schemaPath: []
+  }
+
+  constructor(props){
+    super(props)
+    const {__context, dataPath} = this.props;
+    const {setValueByPath} = __context;
+    if(!this.props.value){
+      setValueByPath([...dataPath], {})
+    }
   }
 
   handleChange = (key)=> (e)=>{
@@ -85,7 +93,10 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
   }
 
   render(){
-    const {schema} = this.props;
+    const {schema, value} = this.props;
+    if(!value){
+      return null;
+    }
     const mulitSchems = this.getMulitSchema(schema);
     const keys = Object.keys(mulitSchems);
     return <div className="object-schema-form">

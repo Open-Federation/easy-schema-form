@@ -31,19 +31,12 @@ function setData(state, keys, value) {
 
 }
 
-function getParentKeys(keys) {
-  if (keys.length === 1) return [];
-  let arr = [].concat(keys);
-  arr.splice(keys.length - 1, 1);
-  return arr;
-}
-
 export default class JsonSchemaForm extends React.PureComponent {
   constructor (props) {
     super (props);
     this.state = {
       store: {
-        value: props.value || {},
+        value: props.value,
         validateResult: [],
       },
       changeStore: this.changeStore,
@@ -56,7 +49,7 @@ export default class JsonSchemaForm extends React.PureComponent {
 
   static propTypes = {
     schema: PropTypes.object,
-    value: PropTypes.object,
+    value: PropTypes.any,
     onChange: PropTypes.func,
     dataPath: PropTypes.array,
     onBlur: PropTypes.func,
@@ -88,12 +81,8 @@ export default class JsonSchemaForm extends React.PureComponent {
 
   setValueByPath =(paths, value)=>{
     this.changeStore((store=>{
-      if(paths.length > 1){
-        const parentPaths = getParentKeys(paths);
-        const data = getData(this.state.store.value, parentPaths)
-        if(!data || typeof data !== 'object'){
-          setData(store.value, parentPaths, {})
-        }
+      if(paths.length === 0){
+        return store.value = value;
       }
       setData(store.value, paths, value)
     }))

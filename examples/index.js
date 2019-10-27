@@ -6,18 +6,23 @@ import simple from './simple-case'
 import {Select} from 'antd'
 import AceEditor from '../src/widgets/ace-editor'
 import './index.scss'
+import advInteractionExpression from './adv-interaction-expressin'
 
 const schema = {
-  simple
+  simple,
+  array: require('./array').default,
+  tabs: require('./tabs').default,
+  objectAndArray: require('./object-and-array').default,
+  advInteractionExpression: advInteractionExpression,
 }
 
-
+const defaultName = 'simple'
 
 export default class App extends React.PureComponent {
   state = {
-    data: {},
-    selectValue: 'simple',
-    jsonSchema: JSON.stringify(schema.simple,null,2)
+    data: schema[defaultName].type === 'object' ?{} : [],
+    selectValue: defaultName,
+    jsonSchema: JSON.stringify(schema[defaultName],null,2)
   };
 
   onChange =(value)=>{
@@ -29,10 +34,12 @@ export default class App extends React.PureComponent {
   render(){
     return <div className="container">
       <div className="header-box">
-        {<Select value={this.state.selectValue} onChange={e=>{
+        <span>Select Schema: &nbsp;</span>
+        {<Select style={{width: 400}} value={this.state.selectValue} onChange={v=>{
           this.setState({
-            selectValue: e.target.value,
-            jsonSchema: schema[e.target.value]
+            selectValue: v,
+            jsonSchema: JSON.stringify(schema[v],null,2),
+            data: schema[v].type === 'array' ? [] : {}
           })
         }}>
           {Object.keys(schema).map(key=>{
@@ -54,7 +61,7 @@ export default class App extends React.PureComponent {
           <h3>Form-Data</h3>
           <AceEditor readOnly={true} className="json-editor" mode="json" value={JSON.stringify(this.state.data,null,2)} />
         </div>
-        <div key={this.state.jsonSchema} className="body-right">
+        <div className="body-right">
           <h3>FORM</h3>
           {this.renderSchema(JSON.parse(this.state.jsonSchema))}
         </div>
@@ -64,7 +71,7 @@ export default class App extends React.PureComponent {
 
   renderSchema (data) {
     return (
-      <JSF onChange={this.onChange} value={this.state.data} schema={data} />
+      <JSF key={this.state.jsonSchema} onChange={this.onChange} value={this.state.data} schema={data} />
     );
   }
 }
