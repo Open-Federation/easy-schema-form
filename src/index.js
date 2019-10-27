@@ -75,6 +75,9 @@ export default class JsonSchemaForm extends React.PureComponent {
     this.changeStore(store=>{
       const arr = getData(this.state.store.value, paths);
       const newArr = arrMove(arr, from ,to)
+      if(paths.length === 0){
+        return store.value = newArr;
+      }
       setData(store.value, paths, newArr)
     })
   }
