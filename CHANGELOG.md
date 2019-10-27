@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.6](https://github.com/hellosean1025/jsf/compare/v0.0.5...v0.0.6) (2019-10-27)
+
+
+### Bug Fixes
+
+* array schema init bug ([ad2a14b](https://github.com/hellosean1025/jsf/commit/ad2a14b))
+
+
+
 ## [0.0.5](https://github.com/hellosean1025/jsf/compare/v0.0.4...v0.0.5) (2019-10-27)
 
 
