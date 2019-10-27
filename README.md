@@ -1,6 +1,8 @@
 # JSF(json-schema-form)
 一个基于 jsonschema 生成form 表单的 react 组件
 
+[Live PlayGround](https://hellosean1025.github.io/jsf/)
+
 # 快速开始
 
 ## Install
@@ -51,3 +53,5 @@ export default class App extends React.PureComponent {
 
 ```
 
+### License
+Apache 2
