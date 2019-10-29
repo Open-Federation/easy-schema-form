@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 export default ()=>(Wrap)=>{
   return class extends React.PureComponent{
 
