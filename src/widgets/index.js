@@ -1,8 +1,9 @@
-import {Input, Select as AntdSelect, Switch as AntdSwitch, InputNumber} from 'antd'
+import {Select as AntdSelect, Switch as AntdSwitch, InputNumber} from 'antd'
 import handleDefault from './handleDefault'
 import React from 'react'
 import CodeEditor from './code-editor'
 import PropTypes from 'prop-types'
+import Input from './input'
 
 const Select = (props)=>{
   const {data = []} = props;
