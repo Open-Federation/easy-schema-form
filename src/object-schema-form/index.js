@@ -100,7 +100,7 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
     const mulitSchems = this.getMulitSchema(schema);
     const keys = Object.keys(mulitSchems);
     return <div className="object-schema-form">
-      {keys.length > 1 && <Tabs defaultActiveKey="1" >
+      {keys.length > 1 && <Tabs defaultActiveKey={defaultGroup} >
         {keys.map(key=>
           <Tabs.TabPane tab={key} key={key}>
             {this.renderSchema(mulitSchems[key])}
