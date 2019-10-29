@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 const Select = (props)=>{
   const {data = []} = props;
-  return <AntdSelect {...props}>
+  return <AntdSelect {...props} dropdownMatchSelectWidth={false} >
     {data.map(item=>{
       return <AntdSelect.Option key={item.value} value={item.value} >
         {item.label}
