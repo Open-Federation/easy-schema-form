@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.10](https://github.com/hellosean1025/jsf/compare/v0.0.9...v0.0.10) (2019-10-30)
+
+
+### Bug Fixes
+
+* tabs defaultValue bug ([4cb2d3f](https://github.com/hellosean1025/jsf/commit/4cb2d3f))
+
+
+### Features
+
+* package name 'jsf.js' to 'jsf-js' ([a455a2d](https://github.com/hellosean1025/jsf/commit/a455a2d))
+
+
+
 ## [0.0.9](https://github.com/hellosean1025/jsf/compare/v0.0.8...v0.0.9) (2019-10-29)
 
 
