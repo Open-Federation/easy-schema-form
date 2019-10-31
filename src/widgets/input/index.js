@@ -1,7 +1,7 @@
 import {Input} from 'antd';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import watchProps from './watchProps';
+import watchProps from '../../common/watchProps';
 
 @watchProps
 export default class InputBlurSearchComponent extends Component {

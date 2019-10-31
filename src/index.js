@@ -7,6 +7,8 @@ import ArraySchemaForm from './array-schema-form'
 import {Button} from 'antd'
 import './index.scss'
 import getName from  './locale'
+import watchProps from './common/watchProps'
+
 const Ajv = require('ajv');
 const ajv = new Ajv();
 
@@ -31,6 +33,7 @@ function setData(state, keys, value) {
 
 }
 
+@watchProps
 export default class JsonSchemaForm extends React.PureComponent {
   constructor (props) {
     super (props);
@@ -62,6 +65,17 @@ export default class JsonSchemaForm extends React.PureComponent {
     enableSumbit: false,
     locale: 'en_US'
   };
+
+  watch = {
+    value: {
+      deep: false,
+      hander(v){
+        this.changeStore(store=>{
+          store.value = v
+        })
+      }
+    }
+  }
 
   moveArrayItem =(paths, from, to)=>{
 
