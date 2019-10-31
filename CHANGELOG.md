@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.12](https://github.com/hellosean1025/jsf/compare/v0.0.11...v0.0.12) (2019-10-31)
+
+
+### Features
+
+* 降低依赖版本号 ([3287950](https://github.com/hellosean1025/jsf/commit/3287950))
+
+
+
 ## [0.0.11](https://github.com/hellosean1025/jsf/compare/v0.0.9...v0.0.11) (2019-10-31)
 
 
