@@ -12,8 +12,8 @@ npm i jsf.js
 
 ## Usage
 ```js
-import JSONSchemaForm from 'jsf-js'
-import 'jsf-js/dist/main.css'
+import JSONSchemaForm from 'jsf.js'
+import 'jsf.js/dist/main.css'
 
 
 const schema = {
