@@ -8,6 +8,7 @@ import {Button} from 'antd'
 import './index.scss'
 import getName from  './locale'
 import watchProps from './common/watchProps'
+import {debounce} from 'lodash'
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
@@ -69,11 +70,13 @@ export default class JsonSchemaForm extends React.PureComponent {
   watch = {
     value: {
       deep: false,
-      hander(v){
-        this.changeStore(store=>{
-          store.value = v
-        })
-      }
+      hander: debounce((v)=>{
+        if(v){
+          this.changeStore(store=>{
+            store.value = JSON.parse(JSON.stringify(v))
+          })
+        }
+      }, 100)
     }
   }
 
