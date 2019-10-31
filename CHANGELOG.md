@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.14](https://github.com/hellosean1025/jsf/compare/v0.0.13...v0.0.14) (2019-10-31)
+
+
+### Bug Fixes
+
+* schemaForm props.value 变化了, jsf 没有处理的异常 ([7f3004c](https://github.com/hellosean1025/jsf/commit/7f3004c))
+
+
+
 ## [0.0.13](https://github.com/hellosean1025/jsf/compare/v0.0.12...v0.0.13) (2019-10-31)
 
 
