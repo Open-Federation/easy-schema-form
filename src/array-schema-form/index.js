@@ -191,8 +191,8 @@ export default class ArrayFieldForm extends React.PureComponent {
     })
   }
 
-  getTitle = (schema = {})=>{
-    const {description, title} = schema;
+  getTitle = (schema = {}, key)=>{
+    const {description, title = key} = schema;
     if(description){
       return <Tooltip title={description}>
         {title}&nbsp;<Icon type="question-circle" theme="outlined" />
@@ -275,7 +275,7 @@ export default class ArrayFieldForm extends React.PureComponent {
       
       result.push ({
         dataIndex: key,
-        title: this.getTitle(itemConfig),
+        title: this.getTitle(itemConfig, key),
         render: (text, record, index) => {
           
           const {store} = this.props.__context;

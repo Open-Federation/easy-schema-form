@@ -26,7 +26,7 @@ const maps = {
   Select,
   Switch,
   TextArea: Input.TextArea,
-  CodeEditor
+  CodeEditor,
 }
 
 Switch.propTypes = {

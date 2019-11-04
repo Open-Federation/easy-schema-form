@@ -49,6 +49,7 @@ export default class JsonSchemaForm extends React.PureComponent {
       deleteArrayItemByPath: this.deleteArrayItemByPath,
       moveArrayItem: this.moveArrayItem,
     };
+    window.__jsf_locale = this.props.locale;
   }
 
   static propTypes = {
@@ -64,7 +65,7 @@ export default class JsonSchemaForm extends React.PureComponent {
   static defaultProps = {
     dataPath: [],
     enableSumbit: false,
-    locale: 'en_US'
+    locale: 'zh_CN'
   };
 
   watch = {
@@ -122,6 +123,11 @@ export default class JsonSchemaForm extends React.PureComponent {
       const arr = getData(store.value, paths);
       arr.splice(index, 1)
     })
+  }
+
+  handleSumbit = ()=>{
+    const newStore = this.state.store;
+    this.props.onChange(newStore.value)
   }
 
   changeStore = fn => {
@@ -185,7 +191,7 @@ export default class JsonSchemaForm extends React.PureComponent {
             />
           }
           {enableSumbit && <div className="item-sumbit">
-            <Button size="large" type="primary">{getName('submit')}</Button>
+            <Button onClick={this.handleSumbit} size="large" type="primary">{getName('submit')}</Button>
           </div>}
         </div>
       </GlobalStoreContext.Provider>

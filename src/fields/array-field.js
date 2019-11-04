@@ -12,6 +12,10 @@ export default class ArrayField extends React.PureComponent{
 
   render(){
     const {schema, ...extraProps} = this.props;
+    /**
+     * mode	设置 Select 的模式为多选或标签	'multiple' | 'tags'
+     */
+    const {mode = 'tags'} = schema;
     let options = [];
     const enumData = schema.items.enum;
     if(Array.isArray(enumData)){
@@ -26,6 +30,6 @@ export default class ArrayField extends React.PureComponent{
         }
       })
     }
-    return <Select {...extraProps} mode="tags" data={options}  />
+    return <Select {...extraProps} mode={mode} data={options}  />
   }
 }

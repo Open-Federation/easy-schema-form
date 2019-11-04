@@ -60,15 +60,17 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
     schema,
     isRequired
   })=>{
+    const ui = schema.ui || {};
+    let {showLabel = true} = ui; 
     return <div className="object-schema-form-item" key={key} >
-      <div className="item-label">
+      {showLabel && <div className="item-label">
         {schema.description && <Tooltip placement="rightTop" title={<div dangerouslySetInnerHTML={{__html: schema.description}} className="description"></div>}>
-          {schema.title}&nbsp;
+          {schema.title || key}&nbsp;
           <Icon type="question-circle" theme="outlined" />
         </Tooltip>}
-        {!schema.description && schema.title}
+        {!schema.description && (schema.title || key)}
         {isRequired && <span style={{color: 'red'}}>*</span>}
-      </div>
+      </div>}
       <div className="item-wrap">
         {el}
         {errorMessage && <div className="error-message">
