@@ -48,6 +48,10 @@ export default class App extends React.PureComponent {
             </Select.Option>
           })}
         </Select>}
+
+        <a style={{marginLeft: 10, marginRight: 10}} href="https://github.com/hellosean1025/jsf">Github</a>
+
+        <a style={{marginLeft: 10, marginRight: 10}} href="https://hellosean1025.github.io/json-schema-visual-editor/">Generate JSON-SCHEMA by Editor</a>
       </div>
       <div className="body-box">
         <div className="body-left">
