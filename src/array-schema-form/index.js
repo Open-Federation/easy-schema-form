@@ -434,6 +434,7 @@ export default class ArrayFieldForm extends React.PureComponent {
         </div>
         <Table
           {...this.props}
+          onChange={()=>{}}
           className="array-field-form-table"
           pagination={{
             defaultPageSize: 20,
