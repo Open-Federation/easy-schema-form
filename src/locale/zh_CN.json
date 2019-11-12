@@ -5,5 +5,6 @@
   "add": "增加",
   "delete": "删除",
   "delete-array-item": "确认要删除吗?",
-  "default_group_name": "常用"
+  "default_group_name": "常用",
+  "Please enter line number jump": "请输入行号跳转"
 }

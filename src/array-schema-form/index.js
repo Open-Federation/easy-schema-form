@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Table, Button, Icon, Modal, Popconfirm, Input, Tooltip} from 'antd';
+import {InputNumber, Table, Button, Icon, Modal, Popconfirm, Input, Tooltip} from 'antd';
 import ObjectSchemaForm from '../object-schema-form'
 import {GlobalStoreContext} from '../context';
 import withContext from '../withContext'
@@ -92,7 +92,10 @@ export default class ArrayFieldForm extends React.PureComponent {
     super (props);
     this.state = {
       modalVisible: false,
-      fastEditModalVisible: false
+      fastEditModalVisible: false,
+      gotoVisible: false,
+      gotoTarget: 0,
+      gotoSrc: 0
     };
 
     const {__context, dataPath, value} = this.props;
@@ -203,6 +206,26 @@ export default class ArrayFieldForm extends React.PureComponent {
     addArrayItemByPath(paths, index , {})
   }
 
+  openGoto = (index)=>()=>{
+    this.setState({
+      gotoVisible: true,
+      gotoSrc: index
+    })
+  }
+
+  closeGoto = ()=>{
+    this.setState({
+      gotoVisible: false,
+      gotoTarget: 0,
+      gotoSrc: 0
+    })
+  }
+
+  handleGoto = ()=>{
+    this.customDragChange(this.state.gotoSrc, this.state.gotoTarget)
+    this.closeGoto()
+  }
+
   getColumns (config) {
     const {items} = config;
     const {advFields = [], properties} = items;
@@ -213,6 +236,11 @@ export default class ArrayFieldForm extends React.PureComponent {
         return <Icon key="plus" onClick={this.handleAdd(index)} type="plus"  />
       }
     }, {
+      render: (text, record)=>{
+        const index = record.key;
+        return <Icon key="arrow-right" onClick={this.openGoto(index)} type="arrow-right"  />
+      }
+    } ,{
       render: (text, record)=>{
         const index = record.key;
         return <Popconfirm
@@ -316,6 +344,10 @@ export default class ArrayFieldForm extends React.PureComponent {
   }
 
   customDragChange = (from, to)=>{
+    const {value} = this.props;
+    if(to > value.length){
+      to = value.length;
+    }
     const {__context, dataPath} = this.props;
     const {moveArrayItem} = __context;
     const paths = [...dataPath]
@@ -413,6 +445,28 @@ export default class ArrayFieldForm extends React.PureComponent {
     </Modal>
   }
 
+  renderGotoModal(){
+    const {gotoVisible, gotoTarget} = this.state;
+    return gotoVisible && <Modal
+      title={getName('Please enter line number jump')}
+      visible={gotoVisible}
+      onOk={this.handleGoto}
+      onCancel={this.closeGoto}
+      width={500}
+    >
+      <div className="array-schema-form-fast-edit">
+        <InputNumber
+          value={gotoTarget}
+          onChange={(v)=>{
+            this.setState({
+              gotoTarget: v
+            })
+          }}
+        />
+      </div>
+    </Modal>
+  }
+
   render () {
     const {uniqueField, schema, value = []} = this.props;
     if(!Array.isArray(value)){
@@ -423,6 +477,7 @@ export default class ArrayFieldForm extends React.PureComponent {
       <div  className="array-field-form">
         {this.renderModal(schema)}
         {this.renderFastModal()}
+        {this.renderGotoModal()}
         <div className="header">
           <div className="title">{schema.title || ''}</div>
           {uniqueField && <div className="fast-edit">
