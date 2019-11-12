@@ -132,18 +132,6 @@ export default class ArrayFieldForm extends React.PureComponent {
     setValueByPath(paths, value)
   };
 
-  componentDidMount(){
-    const formData = this.props.value || [];
-    const {modalDataIndex} = this.state;
-    const data = formData[modalDataIndex || 0];
-    if(!data){
-      const {__context, dataPath} = this.props;
-      const {setValueByPath} = __context;
-      const paths = [...dataPath, 0]
-      setValueByPath(paths, {})
-    }
-  }
-
   renderModal(config){
     const {advFields = [], properties} = config.items;
     const formData = this.props.value || [];
@@ -220,11 +208,13 @@ export default class ArrayFieldForm extends React.PureComponent {
     const {advFields = [], properties} = items;
 
     const settingIcons = [{
-      render: (text, record, index)=>{
+      render: (text, record)=>{
+        const index = record.key;
         return <Icon key="plus" onClick={this.handleAdd(index)} type="plus"  />
       }
     }, {
-      render: (text, record, index)=>{
+      render: (text, record)=>{
+        const index = record.key;
         return <Popconfirm
           key={getName('delete')}
           title={getName('delete-array-item')}
@@ -238,7 +228,8 @@ export default class ArrayFieldForm extends React.PureComponent {
     }];
     if(Array.isArray(advFields) && advFields.length > 0){
       settingIcons.unshift({
-        render: (text, record, index)=>{
+        render: (text, record)=>{
+          const index = record.key;
           return <Icon key="setting" type="setting" onClick={this.openModal(index)} />
         }
       })
@@ -248,10 +239,10 @@ export default class ArrayFieldForm extends React.PureComponent {
       title: '',
       key: 'setting',
       width: 140,
-      render: (text, record, index)=>{
+      render: (text, record)=>{
         return <div className="setting-column-item">
           {settingIcons.map(item=>{
-            return item.render(text, record, index)
+            return item.render(text, record)
           })}
         </div>
       }
@@ -276,8 +267,8 @@ export default class ArrayFieldForm extends React.PureComponent {
       result.push ({
         dataIndex: key,
         title: this.getTitle(itemConfig, key),
-        render: (text, record, index) => {
-          
+        render: (text, record) => {
+          const index = record.key;
           const {store} = this.props.__context;
           const {validateResult} = store;
           const errorMessage = getErrorMessage([...this.props.dataPath, index, key], validateResult)
@@ -444,7 +435,11 @@ export default class ArrayFieldForm extends React.PureComponent {
         <Table
           {...this.props}
           className="array-field-form-table"
-          pagination={false}
+          pagination={{
+            defaultPageSize: 20,
+            showSizeChanger:true
+          }}
+          // pagination={false}
           bordered={true}
           columns={columns}
           dataSource={value.map((item, index)=>{

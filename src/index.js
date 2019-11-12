@@ -8,7 +8,7 @@ import {Button} from 'antd'
 import './index.scss'
 import getName from  './locale'
 import watchProps from './common/watchProps'
-import {debounce} from 'lodash'
+import {debounce, isEqual} from 'lodash'
 
 const Ajv = require('ajv');
 const ajv = new Ajv();
@@ -72,6 +72,9 @@ export default class JsonSchemaForm extends React.PureComponent {
     value: {
       deep: false,
       hander: debounce((v)=>{
+        if(isEqual(v, this.state.store.value)){
+          return;
+        }
         if(v){
           this.changeStore(store=>{
             store.value = JSON.parse(JSON.stringify(v))

@@ -36,6 +36,9 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
     if(!this.props.value){
       setValueByPath([...dataPath], {})
     }
+    this.state = {
+      curTabKey: defaultGroup
+    }
   }
 
   handleChange = (key)=> (e)=>{
@@ -102,14 +105,18 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
     const mulitSchems = this.getMulitSchema(schema);
     const keys = Object.keys(mulitSchems);
     return <div className="object-schema-form">
-      {keys.length > 1 && <Tabs defaultActiveKey={defaultGroup} >
+      {keys.length > 1 && <Tabs onChange={(key=>{
+        this.setState({
+          curTabKey: key
+        })
+      })} activeKey={this.state.curTabKey} defaultActiveKey={defaultGroup} >
         {keys.map(key=>
           <Tabs.TabPane tab={key} key={key}>
-            {this.renderSchema(mulitSchems[key])}
           </Tabs.TabPane>
         )}
       </Tabs>}
       {keys.length === 1 && this.renderSchema(mulitSchems[keys[0]])}
+      {keys.length > 1 && this.renderSchema(mulitSchems[this.state.curTabKey])}
       
     </div>
   }
