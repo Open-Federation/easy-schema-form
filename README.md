@@ -1,9 +1,6 @@
 # jsfer(json-schema-form)
 一个基于 jsonschema 生成form 表单的 react 组件
 
-## 背景
-react-json-schema-form 交互太难用，不得不重新造一个。。。
-
 ## 目标
 1. 采用标准化交互，满足各类需求
    * 为了实现这个目的，我们对 object 类型统一为左右两栏布局;
