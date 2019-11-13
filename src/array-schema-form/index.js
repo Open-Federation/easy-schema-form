@@ -235,12 +235,18 @@ export default class ArrayFieldForm extends React.PureComponent {
         const index = record.key;
         return <Icon key="plus" onClick={this.handleAdd(index)} type="plus"  />
       }
-    }, {
-      render: (text, record)=>{
-        const index = record.key;
-        return <Icon key="arrow-right" onClick={this.openGoto(index)} type="arrow-right"  />
-      }
-    } ,{
+    }];
+
+    if(this.props.value.length > 10){
+      settingIcons.push({
+        render: (text, record)=>{
+          const index = record.key;
+          return <Icon key="arrow-right" onClick={this.openGoto(index)} type="arrow-right"  />
+        }
+      })
+    }
+
+    settingIcons.push({
       render: (text, record)=>{
         const index = record.key;
         return <Popconfirm
@@ -253,7 +259,8 @@ export default class ArrayFieldForm extends React.PureComponent {
           <Icon key="delete" type="delete"  />
         </Popconfirm>
       }
-    }];
+    })
+
     if(Array.isArray(advFields) && advFields.length > 0){
       settingIcons.unshift({
         render: (text, record)=>{
@@ -454,7 +461,7 @@ export default class ArrayFieldForm extends React.PureComponent {
       onCancel={this.closeGoto}
       width={500}
     >
-      <div className="array-schema-form-fast-edit">
+      <div className="array-schema-form-goto">
         <InputNumber
           value={gotoTarget}
           onChange={(v)=>{
