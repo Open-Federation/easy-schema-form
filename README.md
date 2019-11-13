@@ -2,7 +2,7 @@
 一个基于 jsonschema 生成form 表单的 react 组件
 
 ## 背景
-作为 react-json-schema-form 资深用户，表示react-json-schema-form交互太难用，我不得不重新造一个!
+react-json-schema-form 交互太难用，不得不重新造一个。。。
 
 ## 目标
 1. 采用标准化交互，满足各类需求
@@ -11,6 +11,7 @@
 
 2. 使用了 ajv 验证库
 3. 支持通过 js 表达式自定义部分交互（比如隐藏、禁用等）
+4. 支持自定义组件
 
 [Live PlayGround](https://hellosean1025.github.io/jsf/)
 
