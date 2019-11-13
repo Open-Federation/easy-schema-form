@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.15](https://github.com/hellosean1025/jsf/compare/v0.0.14...v0.0.15) (2019-11-13)
+
+
+### Bug Fixes
+
+* watch 后没有检测是否改动,直接修改 state 问题 ([825fed5](https://github.com/hellosean1025/jsf/commit/825fed5))
+* watch 后没有检测是否改动,直接修改 state 问题 ([318ace2](https://github.com/hellosean1025/jsf/commit/318ace2))
+* 多语言配置无效问题和提交功能无效问题 ([0758365](https://github.com/hellosean1025/jsf/commit/0758365))
+* 过于频繁更新 store 导致的bug ([ad722af](https://github.com/hellosean1025/jsf/commit/ad722af))
+
+
+### Features
+
+* 支持通过行号跳转 ([e48784d](https://github.com/hellosean1025/jsf/commit/e48784d))
+
+
+
 ## [0.0.14](https://github.com/hellosean1025/jsf/compare/v0.0.13...v0.0.14) (2019-10-31)
 
 
