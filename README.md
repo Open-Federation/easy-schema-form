@@ -1,4 +1,4 @@
-# JSF(json-schema-form)
+# jsfer(json-schema-form)
 一个基于 jsonschema 生成form 表单的 react 组件
 
 ## 背景
@@ -19,13 +19,13 @@ react-json-schema-form 交互太难用，不得不重新造一个。。。
 
 ## Install
 ```bash
-npm i jsf.js
+npm i jsfer
 ```
 
 ## Usage
 ```js
-import JSONSchemaForm from 'jsf.js'
-import 'jsf.js/dist/main.css'
+import JSONSchemaForm from 'jsfer'
+import 'jsfer/dist/main.css'
 
 
 const schema = {
