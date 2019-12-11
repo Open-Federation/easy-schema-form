@@ -1,4 +1,3 @@
-# jsfer(json-schema-form)
 一个基于 jsonschema 生成form 表单的 react 组件
 
 ## 目标
