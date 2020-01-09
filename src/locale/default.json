@@ -6,5 +6,8 @@
   "delete": "Delete",
   "delete-array-item": "Are you sure delete this?",
   "default_group_name": "General",
-  "Please enter line number jump": "Please enter line number jump"
+  "please_enter_line_number_jump": "Please enter line number jump",
+  "jump_to_a_line": "Jump to a line",
+  "add_a_new_line": "Add a new line",
+  "Delete" : "Delete"
 }

@@ -160,6 +160,9 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
         default={itemInfo.default} 
         value={value[key]} 
         onChange={this.handleChange(key)} 
+        changeParentData={(key, value)=>{
+          this.handleChange(key)(value)
+        }}
         schema={itemInfo} 
         dataPath={[...dataPath, key]}
         onBlur={this.props.onBlur}

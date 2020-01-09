@@ -17,7 +17,8 @@ const Select = (props)=>{
 }
 
 const Switch= (props)=>{
-  return <AntdSwitch  {...props} checked={props.value} />
+  const {changeParentData, ...extraProps} = props; //eslint-disable-line
+  return <AntdSwitch  {...extraProps} checked={props.value} />
 }
 
 const maps = {

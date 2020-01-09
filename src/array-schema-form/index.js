@@ -100,7 +100,7 @@ export default class ArrayFieldForm extends React.PureComponent {
 
     const {__context, dataPath, value} = this.props;
     const {setValueByPath} = __context;
-    if(!value || !Array.isArray(value)){
+    if(!value || !Array.isArray(value) || value.length === 0){
       setValueByPath([...dataPath], [])
     }
   }
@@ -116,6 +116,7 @@ export default class ArrayFieldForm extends React.PureComponent {
 
   static defaultProps = {
     dataPath: [],
+    value: []
   }
 
   handleChange = (key, index) => e => {
@@ -154,7 +155,7 @@ export default class ArrayFieldForm extends React.PureComponent {
     if(!Array.isArray || advFields.length === 0){
       return null;
     }
-    return <Modal 
+    return this.state.modalVisible && <Modal 
       onCancel={()=>{
         this.setState({
           modalVisible: false
@@ -228,20 +229,24 @@ export default class ArrayFieldForm extends React.PureComponent {
 
   getColumns (config) {
     const {items} = config;
-    const {advFields = [], properties} = items;
+    const {advFields = [], properties, enableDrag = true} = items;
 
     const settingIcons = [{
       render: (text, record)=>{
         const index = record.key;
-        return <Icon key="plus" onClick={this.handleAdd(index)} type="plus"  />
+        return <Tooltip key="plus" title={getName('add_a_new_line')}>
+          <Icon  onClick={this.handleAdd(index)} type="plus"  />
+        </Tooltip>
       }
     }];
 
-    if(this.props.value.length > 10){
+    if(enableDrag && this.props.value.length > 10){
       settingIcons.push({
         render: (text, record)=>{
           const index = record.key;
-          return <Icon key="arrow-right" onClick={this.openGoto(index)} type="arrow-right"  />
+          return <Tooltip key="arrow-right" title={getName('jump_to_a_line')}>
+            <Icon  onClick={this.openGoto(index)} type="arrow-right"  />
+          </Tooltip>
         }
       })
     }
@@ -256,7 +261,9 @@ export default class ArrayFieldForm extends React.PureComponent {
           okText="Yes"
           cancelText="No"
         >
-          <Icon key="delete" type="delete"  />
+          <Tooltip key="delete" title={getName("Delete")}>
+            <Icon  type="delete"  />
+          </Tooltip>
         </Popconfirm>
       }
     })
@@ -265,7 +272,9 @@ export default class ArrayFieldForm extends React.PureComponent {
       settingIcons.unshift({
         render: (text, record)=>{
           const index = record.key;
-          return <Icon key="setting" type="setting" onClick={this.openModal(index)} />
+          return <Tooltip key="setting" title={getName('advance-setting')}>
+            <Icon  type="setting" onClick={this.openModal(index)} />
+          </Tooltip>
         }
       })
     }
@@ -283,16 +292,20 @@ export default class ArrayFieldForm extends React.PureComponent {
       }
     }]
 
-    const initColumns = [{
-      title: '',
-      key: 'drag',
-      width: 50,
-      render: ()=>{
-        return <div is-drag="true" className="setting-column-item-drag">
-          <Icon type="drag" />
-        </div>
-      }
-    }]
+    const initColumns = []
+
+    if(enableDrag){
+      initColumns.push({
+        title: '',
+        key: 'drag',
+        width: 35,
+        render: ()=>{
+          return <div  key={"drag"} is-drag="true" className="setting-column-item-drag">
+            <Icon type="drag" />
+          </div>
+        }
+      })
+    }
     
     return [...Object.keys (properties).reduce ((result, key) => {
       if(advFields.indexOf(key) !== -1)return result;
@@ -321,7 +334,10 @@ export default class ArrayFieldForm extends React.PureComponent {
             default={itemConfig.default}
             onBlur={this.props.onBlur}  
             value={text} 
-            onChange={this.handleChange (key, index)} 
+            onChange={this.handleChange (key, index)}
+            changeParentData={(key, value)=>{
+              return this.handleChange (key, index)(value)
+            }} 
           />
           
           if(ui.hide === true){
@@ -455,7 +471,7 @@ export default class ArrayFieldForm extends React.PureComponent {
   renderGotoModal(){
     const {gotoVisible, gotoTarget} = this.state;
     return gotoVisible && <Modal
-      title={getName('Please enter line number jump')}
+      title={getName('please_enter_line_number_jump')}
       visible={gotoVisible}
       onOk={this.handleGoto}
       onCancel={this.closeGoto}
@@ -502,6 +518,7 @@ export default class ArrayFieldForm extends React.PureComponent {
             defaultPageSize: 20,
             showSizeChanger:true
           }}
+          size={"small"}
           // pagination={false}
           bordered={true}
           columns={columns}

@@ -1,7 +1,7 @@
 import {Input} from 'antd';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import watchProps from '../../common/watchProps';
+import watchProps from '../../hoc/watchProps';
 
 @watchProps
 export default class InputBlurSearchComponent extends Component {
@@ -30,12 +30,18 @@ export default class InputBlurSearchComponent extends Component {
     this.props.onChange (e.target.value)
   }
 
+  onBlur = e => {
+    this.props.onChange (e.target.value)
+    this.props.onBlur()
+  }
+
   render () {
+    const {changeParentData, ...extraProps} = this.props; // eslint-disable-line
     return (
       <Input
-        {...this.props}
+        {...extraProps}
         value={this.state.value}
-        onBlur={e => this.props.onChange (e.target.value)}
+        onBlur={this.onBlur}
         onChange={e => this.setState({
           value: e.target.value
         })}
@@ -72,12 +78,17 @@ class TextArea extends Component {
     this.props.onChange (e.target.value)
   }
 
+  onBlur = e => {
+    this.props.onChange (e.target.value)
+    this.props.onBlur()
+  }
+
   render () {
     return (
       <Input.TextArea
         {...this.props}
         value={this.state.value}
-        onBlur={e => this.props.onChange (e.target.value)}
+        onBlur={this.onBlur}
         onChange={e => this.setState({
           value: e.target.value
         })}

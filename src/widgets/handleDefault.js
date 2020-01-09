@@ -13,7 +13,7 @@ export default ()=>(Wrap)=>{
     componentDidMount(){
       const {value, onChange} = this.props;
       const defaultValue = this.props.default;
-      if(defaultValue && !value){
+      if(defaultValue && typeof value === 'undefined'){
         onChange(defaultValue)
       }
     }

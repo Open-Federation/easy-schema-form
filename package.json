@@ -1,5 +1,5 @@
 {
-  "name": "jsfer",
+  "name": "easyform",
   "version": "0.0.16",
   "description": "",
   "main": "dist/main.js",
@@ -10,11 +10,21 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -p",
     "changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
     "release": "./release.sh",
-    "prepublishOnly": "npm run release"
+    "prepublishOnly": "npm run release",
+    "test": "NODE_ENV=test ava --verbose"
+  },
+  "ava": {
+    "files": [
+      "src/**/*.test.js"
+    ],
+    "require": [
+      ".//help/test-env.js",
+      "ignore-styles"
+    ],
+    "babel": "inherit"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hellosean1025/jsf.git"
+    "type": "git"
   },
   "dependencies": {
     "ajv": "^6.0.0",
@@ -23,12 +33,13 @@
     "immer": "^4.0.2",
     "lodash": "^4.0.0",
     "prop-types": "^15.6.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "^16.5.2",
+    "react-dom": "^16.4.0"
   },
   "author": "hellosean1025",
   "devDependencies": {
     "autoprefixer": "^7.2.6",
+    "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.5",
@@ -42,6 +53,8 @@
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.11",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-html": "^4.0.3",
@@ -52,6 +65,7 @@
     "glob": "^7.1.3",
     "html-webpack-include-assets-plugin": "^1.0.4",
     "html-webpack-plugin": "^3.2.0",
+    "ignore-styles": "^5.0.1",
     "less": "^2.7.2",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.0",
@@ -71,9 +85,5 @@
     "yargs": "^12.0.1",
     "ydoc": "^4.0.6"
   },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hellosean1025/jsfer/issues"
-  },
-  "homepage": "https://github.com/hellosean1025/jsfer#readme"
+  "license": "ISC"
 }

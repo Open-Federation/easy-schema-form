@@ -1,8 +1,5 @@
-# jsfer(json-schema-form)
+# easyform
 一个基于 jsonschema 生成form 表单的 react 组件
-
-## 背景
-react-json-schema-form 交互太难用，不得不重新造一个。。。
 
 ## 目标
 1. 采用标准化交互，满足各类需求
@@ -19,13 +16,13 @@ react-json-schema-form 交互太难用，不得不重新造一个。。。
 
 ## Install
 ```bash
-npm i jsfer
+npm i easyform
 ```
 
 ## Usage
 ```js
-import JSONSchemaForm from 'jsfer'
-import 'jsfer/dist/main.css'
+import EasyForm from 'easyform'
+import 'easyform/dist/main.css'
 
 
 const schema = {
@@ -58,7 +55,7 @@ export default class App extends React.PureComponent {
 
   render () {
     return (
-      <JSONSchemaForm onChange={this.onChange} value={this.state.data} schema={schema} />
+      <EasyForm onChange={this.onChange} value={this.state.data} schema={schema} />
     );
   }
 }
@@ -66,4 +63,4 @@ export default class App extends React.PureComponent {
 ```
 
 ### License
-Apache 2
+MIT
