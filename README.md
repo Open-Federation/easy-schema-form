@@ -1,4 +1,4 @@
-# easyform
+# easy-schema-form
 一个基于 jsonschema 生成form 表单的 react 组件
 
 ## 目标
@@ -16,13 +16,13 @@
 
 ## Install
 ```bash
-npm i easyform
+npm i easy-schema-form
 ```
 
 ## Usage
 ```js
-import EasyForm from 'easyform'
-import 'easyform/dist/main.css'
+import EasyForm from 'easy-schema-form'
+import 'easy-schema-form/dist/main.css'
 
 
 const schema = {
