@@ -12,10 +12,14 @@ import {moveArrayItemAction,
   addArrayItemByPathAction,
   deleteArrayItemByPathAction
 } from './model'
+import watchProps from './hoc/watchProps'
 
 const Ajv = require('ajv');
-const ajv = new Ajv();
+const ajv = new Ajv({allErrors: true, jsonPointers: true});
+// Ajv options allErrors and jsonPointers are required
+require('ajv-errors')(ajv /*, {singleError: true} */);
 
+@watchProps
 export default class JsonSchemaForm extends React.PureComponent {
   constructor (props) {
     super (props);
@@ -40,14 +44,25 @@ export default class JsonSchemaForm extends React.PureComponent {
     dataPath: PropTypes.array,
     onBlur: PropTypes.func,
     enableSumbit: PropTypes.bool,
-    locale: PropTypes.oneOf(['zh_CN', 'en_US'])
+    getOpenValiteApi: PropTypes.func,
+    locale: PropTypes.oneOf(['zh_CN', 'en_US']),
+    enableOnBlurValite: PropTypes.bool,
   };
 
   static defaultProps = {
     dataPath: [],
     enableSumbit: false,
-    locale: 'zh_CN'
+    locale: 'zh_CN',
+    enableOnBlurValite: true
   };
+
+  watch = {
+    value: function(newVal){
+      this.changeStore(store=>{
+        store.value = newVal;
+      })
+    }
+  }
 
   moveArrayItem =(paths, from, to)=>{
     this.changeStore(store=>{
@@ -89,7 +104,7 @@ export default class JsonSchemaForm extends React.PureComponent {
     this.props.onChange(newStore.value)
   }
 
-  changeStore = fn => {
+  changeStore = (fn, cb) => {
     this.setState (state => {
       const {enableSumbit} = this.props;
       const newStore = produce (state.store, draftState => {
@@ -103,37 +118,77 @@ export default class JsonSchemaForm extends React.PureComponent {
       return {
         store: newStore,
       };
+    }, ()=>{
+      if(cb){
+        cb()
+      }
     });
   };
 
-  valiteData = ()=>{
-    /**
-     * 因 blur 后，部分组件存在异步的 setState 调用，所以这里需要延时处理
-     */
-    setTimeout(()=>{
-      const {schema} = this.props;
-      const {store} = this.state;
-      const validate = ajv.compile(schema);
-      const valid = validate(store.value);
+  getErrors = ()=>{
+    return this.state.store.validateResult;
+  }
+
+  _getOpenValiteApi = (fn)=>{
+    if(fn){
+      fn(this._valiteData)
+    }
+  }
+
+  _valiteData = ()=>{
+    const {schema} = this.props;
+    const {store} = this.state;
+    const validate = ajv.compile(schema);
+    const valid = validate(store.value);
+    return new Promise((resolve=>{
       if (!valid){
         this.changeStore(store=>{
           const errors = validate.errors.map(item=>{
+            if(item.keyword === 'errorMessage'){
+              let error = item.params.errors[0];
+              return {
+                ...item,
+                keyword: error.keyword,
+                params: {
+                  ...(error.params || {})
+                }
+              }
+            }else{
+              return item;
+            }
+          }).map(item=>{
             if(item.keyword === 'required'){
               return {
                 ...item,
                 dataPath: item.dataPath +`.${item.params.missingProperty}`
               }
-            }
+            } 
             return item;
           })
           store.validateResult = errors;
+        }, ()=>{
+          resolve(this.getErrors())
         })
       }else{
         this.changeStore(store=>{
           store.validateResult = [];
+        }, ()=>{
+          resolve([])
         })
       }
-    }, 100)
+    }))
+  }
+
+  valiteData = ()=>{
+    if(!this.props.enableOnBlurValite){
+      return;
+    }
+    /**
+     * 因 blur 后，部分组件存在异步的 setState 调用，所以这里需要延时处理
+     */
+    setTimeout(()=>{
+      this._valiteData()
+    }, 1000)
   }
 
   render () {
@@ -147,6 +202,8 @@ export default class JsonSchemaForm extends React.PureComponent {
     } else {
       throw new Error ('Not Support Type');
     }
+
+    this._getOpenValiteApi(this.props.getOpenValiteApi)
 
     return (
       <GlobalStoreContext.Provider value={this.state}>
