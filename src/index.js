@@ -58,8 +58,13 @@ export default class JsonSchemaForm extends React.PureComponent {
 
   watch = {
     value: function(newVal){
-      this.changeStore(store=>{
-        store.value = newVal;
+      this.setState(state=>{
+        return {
+          store: {
+            ...state.store,
+            value: newVal
+          }
+        }
       })
     }
   }
@@ -105,22 +110,23 @@ export default class JsonSchemaForm extends React.PureComponent {
   }
 
   changeStore = (fn, cb) => {
+    let newStore;
     this.setState (state => {
-      const {enableSumbit} = this.props;
-      const newStore = produce (state.store, draftState => {
+      newStore = produce (state.store, draftState => {
         if (typeof fn === 'function') {
           fn (draftState, state.store);
         }
       })
-      if(!enableSumbit){
-        this.props.onChange(newStore.value)
-      }
       return {
         store: newStore,
       };
     }, ()=>{
       if(cb){
         cb()
+      }
+      const {enableSumbit} = this.props;
+      if(!enableSumbit){
+        this.props.onChange(newStore.value)
       }
     });
   };
