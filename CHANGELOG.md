@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.0.20](https://github.com/hellosean1025/jsf/compare/v0.0.19...v0.0.20) (2020-06-19)
+
+
+### Features
+
+* 增加必要依赖 ([759746a](https://github.com/hellosean1025/jsf/commit/759746a8c2876d1f65f5ff49d48a4140433ef80c))
+* 增加时间组件和修复默认值初始导致的bug ([7a8463c](https://github.com/hellosean1025/jsf/commit/7a8463c51e2409d399ac9241af0da060933cd077))
 
 ## [0.0.19](https://github.com/hellosean1025/jsf/compare/v0.0.18...v0.0.19) (2020-03-04)
 
