@@ -27,16 +27,13 @@
     "type": "git"
   },
   "dependencies": {
-    "ajv": "^6.0.0",
-    "antd": "^3.9.0",
-    "immer": "^4.0.2",
-    "lodash": "^4.0.0",
     "prop-types": "^15.6.1",
-    "react": "^16.5.2",
-    "react-dom": "^16.4.0"
+    "immer": "^4.0.2"
   },
   "author": "hellosean1025",
   "devDependencies": {
+    "ajv": "^6.0.0",
+    "antd": "^3.9.0",
     "autoprefixer": "^7.2.6",
     "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
@@ -68,11 +65,14 @@
     "ignore-styles": "^5.0.1",
     "less": "^2.7.2",
     "less-loader": "^4.1.0",
+    "lodash": "^4.0.0",
     "mini-css-extract-plugin": "^0.4.0",
     "mockjs": "^1.0.1-beta3",
     "node-sass": "4.9.0",
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "sass-loader": "^7.0.1",
     "semver": "^5.5.1",
     "shelljs": "^0.8.2",
