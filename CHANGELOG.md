@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/hellosean1025/jsf/compare/v0.0.20...v1.0.1) (2020-07-15)
+
+
+### Features
+
+* 删除codeEditor组件,减小包大小 ([c6400c0](https://github.com/hellosean1025/jsf/commit/c6400c0f19461e40c3747978d26a286a842cecec))
+
 ### [0.0.20](https://github.com/hellosean1025/jsf/compare/v0.0.19...v0.0.20) (2020-06-19)
 
 
