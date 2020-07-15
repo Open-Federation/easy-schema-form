@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import 'antd/dist/antd.css'
-import JSF from '../src'
+import JSF, {addWidget} from '../src'
 import simple from './simple-case'
 import {Select} from 'antd'
-import AceEditor from '../src/widgets/ace-editor'
+import AceEditor from './ace-editor'
 import './index.scss'
 import advInteractionExpression from './adv-interaction-expressin'
 
@@ -15,6 +15,8 @@ const schema = {
   objectAndArray: require('./object-and-array').default,
   advInteractionExpression: advInteractionExpression,
 }
+
+addWidget('CodeEditor', AceEditor)
 
 const defaultName = 'simple'
 

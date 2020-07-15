@@ -2,6 +2,7 @@ const path = require ('path');
 const HtmlWebpackPlugin = require ('html-webpack-plugin');
 const MiniCssExtractPlugin = require ('mini-css-extract-plugin');
 const isDemo = process.env.DEMO === 'true'
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const CleanWebpackPlugin = require ('clean-webpack-plugin');
 
@@ -32,7 +33,6 @@ const plugins = [
 const externals =  {
   react: 'react',
   lodash: 'lodash',
-  brace: 'brace',
   "react-dom": "react-dom",
   "prop-types": "prop-types",
   antd: 'antd',

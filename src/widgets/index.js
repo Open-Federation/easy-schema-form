@@ -1,7 +1,6 @@
 import {Select as AntdSelect, Switch as AntdSwitch, InputNumber, DatePicker as AntdDatePicker} from 'antd'
-import handleDefault from './handleDefault'
+import _handleDefault from './handleDefault'
 import React from 'react'
-import CodeEditor from './code-editor'
 import PropTypes from 'prop-types'
 import Input from './input'
 import moment from 'moment'
@@ -10,6 +9,8 @@ import moment from 'moment'
 const defaultDateProps = {
   format: 'YYYYMMDD',
 }
+
+export const handleDefault = _handleDefault;
 
 const DatePicker = (props)=>{
   const newProps = {
@@ -51,7 +52,6 @@ const maps = {
   Select,
   Switch,
   TextArea: Input.TextArea,
-  CodeEditor,
   DatePicker
 }
 
@@ -64,7 +64,7 @@ Select.propTypes =  {
 }
 
 const result = Object.keys(maps).reduce((result, key)=>{
-  result[key] = handleDefault()(maps[key])
+  result[key] = _handleDefault()(maps[key])
   return result
 }, {})
 

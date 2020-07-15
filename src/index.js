@@ -13,11 +13,16 @@ import {moveArrayItemAction,
   deleteArrayItemByPathAction
 } from './model'
 import watchProps from './hoc/watchProps'
+import widgets, {handleDefault} from './widgets'
 
 const Ajv = require('ajv');
 const ajv = new Ajv({allErrors: true, jsonPointers: true});
 // Ajv options allErrors and jsonPointers are required
 require('ajv-errors')(ajv /*, {singleError: true} */);
+
+export function addWidget(name, component){
+  widgets[name] = handleDefault()(component);
+}
 
 @watchProps
 export default class JsonSchemaForm extends React.PureComponent {
@@ -133,6 +138,10 @@ export default class JsonSchemaForm extends React.PureComponent {
 
   getErrors = ()=>{
     return this.state.store.validateResult;
+  }
+
+  openApi = {
+    getErrors: this.getErrors
   }
 
   _getOpenValiteApi = (fn)=>{
