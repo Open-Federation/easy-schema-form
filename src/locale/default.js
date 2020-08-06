@@ -1,4 +1,4 @@
-{
+export default {
   "submit": "Submit",
   "advance-setting": "Advance-Settings",
   "quick-edit": "Quick-Edits",

@@ -1,9 +1,10 @@
 import nodeResolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'
-// import commonjs from 'rollup-plugin-commonjs'
+import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
+import scss from 'rollup-plugin-scss'
 
 const env = process.env.NODE_ENV
 
@@ -31,7 +32,21 @@ const config = {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env)
-    })
+    }),
+    scss(),
+    commonjs({
+      namedExports: {
+        'node_modules/react-js/index.js': ['isValidElementType'],
+      },
+      include: [
+        /node_modules\/prop-types/,
+        /node_modules\/hoist-non-react-statics/,
+        /node_modules\/invariant/,
+        /node_modules\/react-is/,
+        /node_modules\/warning/,
+        /node_modules\/moment/,
+      ],
+    }),
   ]
 }
 

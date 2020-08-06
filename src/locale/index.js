@@ -1,16 +1,16 @@
-import defaultJson from './default.json'
-import zhCNJson from './zh_CN.json'
+import defaultJson from './default.js'
+import zhCNJson from './zh_CN.js'
 window.__jsf_locale = 'default';
 
 const maps = {
-  default : defaultJson,
+  _ : defaultJson,
   zh_CN: zhCNJson
 }
 
 export default function (name){
   let locale = window.__jsf_locale;
   if(!maps[locale]){
-    locale = 'default';
+    locale = '_';
   }
   return maps[locale][name]
 }

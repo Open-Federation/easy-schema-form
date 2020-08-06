@@ -1,4 +1,4 @@
-{
+export default {
   "submit": "提交",
   "advance-setting": "高级设置",
   "quick-edit": "快速编辑",
