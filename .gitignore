@@ -13,3 +13,5 @@ docs.yml
 .nyc_output
 coverage
 package-lock.json
+es
+lib
