@@ -5,6 +5,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
 import scss from 'rollup-plugin-scss'
+import copyAssets from 'rollup-plugin-copy-imported-assets';
 
 const env = process.env.NODE_ENV
 
@@ -12,8 +13,8 @@ const config = {
   input: 'src/index.js',
   external: Object.keys(pkg.peerDependencies || {}),
   output: {
-    format: 'umd',
-    name: 'SchemaForm',
+    format: 'esm',
+    name: 'main',
     globals: {
       react: 'React',
       redux: 'Redux',
@@ -33,7 +34,9 @@ const config = {
     replace({
       'process.env.NODE_ENV': JSON.stringify(env)
     }),
+    
     scss(),
+    
     commonjs({
       namedExports: {
         'node_modules/react-js/index.js': ['isValidElementType'],
