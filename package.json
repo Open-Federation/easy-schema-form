@@ -89,7 +89,7 @@
     "lodash": "^4.0.0",
     "mini-css-extract-plugin": "^0.4.0",
     "mockjs": "^1.0.1-beta3",
-    "node-sass": "4.9.0",
+    "node-sass": "4.14.1",
     "postcss-loader": "^3.0.0",
     "postcss-scss": "^2.1.1",
     "pre-commit": "^1.2.2",
