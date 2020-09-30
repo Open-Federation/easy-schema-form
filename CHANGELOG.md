@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.7](https://github.com/easy-lib/easy-schema-form/compare/v1.0.6...v1.0.7) (2020-09-30)
+
+
+### Features
+
+* add rowData in the arrayType item ([4247b14](https://github.com/easy-lib/easy-schema-form/commit/4247b144370d682a717020233a2cade6f1a29329))
+
 ### [1.0.6](https://github.com/easy-lib/easy-schema-form/compare/v1.0.5...v1.0.6) (2020-08-06)
 
 ### [1.0.5](https://github.com/easy-lib/easy-schema-form/compare/v1.0.4...v1.0.5) (2020-08-06)
