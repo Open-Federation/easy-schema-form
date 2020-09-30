@@ -337,7 +337,11 @@ export default class ArrayFieldForm extends React.PureComponent {
             onChange={this.handleChange (key, index)}
             changeParentData={(key, value)=>{
               return this.handleChange (key, index)(value)
-            }} 
+            }}
+            rowData={{
+                index,
+                record
+            }}
           />
           
           if(ui.hide === true){
