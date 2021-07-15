@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {InputNumber, Table, Button, Icon, Modal, Popconfirm, Input, Tooltip} from 'antd';
+import {InputNumber, Table, Button, Modal, Popconfirm, Input, Tooltip} from 'antd';
+import { Icon } from '@ant-design/compatible';
 import ObjectSchemaForm from '../object-schema-form'
 import {GlobalStoreContext} from '../context';
 import withContext from '../withContext'

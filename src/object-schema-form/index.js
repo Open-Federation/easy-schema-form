@@ -7,7 +7,8 @@ import withContext from '../withContext'
 import {getErrorMessage, getComponent, schemaHander} from '../utils'
 import ObjectSchemaForm from './'
 import FieldComponent from '../fields'
-import {Tooltip, Icon, Tabs} from 'antd'
+import {Tooltip, Tabs} from 'antd'
+import { Icon } from '@ant-design/compatible';
 import getName from '../locale'
 
 const defaultGroup = getName('default_group_name')
