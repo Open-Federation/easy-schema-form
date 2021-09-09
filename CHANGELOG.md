@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.8](https://github.com/easy-lib/easy-schema-form/compare/v1.0.7...v1.0.8) (2021-09-09)
+
+
+### Features
+
+* 支持antv v4和支持className ([4a62efa](https://github.com/easy-lib/easy-schema-form/commit/4a62efac94ef633c848ea2e62bce1f5ce1b1e9c5))
+
 ### [1.0.7](https://github.com/easy-lib/easy-schema-form/compare/v1.0.6...v1.0.7) (2020-09-30)
 
 
