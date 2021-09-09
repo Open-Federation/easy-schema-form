@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.12](https://github.com/easy-lib/easy-schema-form/compare/v1.0.11...v1.0.12) (2021-09-09)
+
+
+### Bug Fixes
+
+* depends bug ([70a39cc](https://github.com/easy-lib/easy-schema-form/commit/70a39ccda8b63fc24b3fc4a1997d0b9220228bf8))
+
 ### [1.0.11](https://github.com/easy-lib/easy-schema-form/compare/v1.0.10...v1.0.11) (2021-09-09)
 
 ### [1.0.10](https://github.com/easy-lib/easy-schema-form/compare/v1.0.9...v1.0.10) (2021-09-09)
