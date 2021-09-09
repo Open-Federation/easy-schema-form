@@ -5,7 +5,6 @@ import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
 import scss from 'rollup-plugin-scss'
-import copyAssets from 'rollup-plugin-copy-imported-assets';
 
 const env = process.env.NODE_ENV
 
