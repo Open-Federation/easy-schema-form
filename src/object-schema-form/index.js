@@ -7,8 +7,9 @@ import withContext from '../withContext'
 import {getErrorMessage, getComponent, schemaHander} from '../utils'
 import ObjectSchemaForm from './'
 import FieldComponent from '../fields'
-import {Tooltip, Icon, Tabs} from 'antd'
+import {Tooltip, Tabs} from 'antd'
 import getName from '../locale'
+import {Icon} from '@ant-design/compatible';
 
 const defaultGroup = getName('default_group_name')
 
@@ -64,8 +65,9 @@ export default  class _ObjectSchemaForm extends React.PureComponent{
     isRequired
   })=>{
     const ui = schema.ui || {};
-    let {showLabel = true} = ui; 
-    return <div className="object-schema-form-item" key={key} >
+    let {showLabel = true, options = {}} = ui;
+    let { className = '' } = options;
+    return <div className={`object-schema-form-item ${className ? 'object-schema-form-item-' + className : ''} ${'object-schema-form-item-'+ key}`} key={key} >
       {showLabel && <div className="item-label">
         {schema.description && <Tooltip placement="rightTop" title={<div dangerouslySetInnerHTML={{__html: schema.description}} className="description"></div>}>
           {schema.title || key}&nbsp;

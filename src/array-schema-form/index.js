@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {InputNumber, Table, Button, Icon, Modal, Popconfirm, Input, Tooltip} from 'antd';
+import {InputNumber, Table, Button, Modal, Popconfirm, Input, Tooltip} from 'antd';
 import ObjectSchemaForm from '../object-schema-form'
 import {GlobalStoreContext} from '../context';
 import withContext from '../withContext'
@@ -9,6 +9,7 @@ import './index.scss'
 import FieldComponent from '../fields'
 import {union, find} from 'lodash'
 import getName from '../locale'
+import {Icon} from '@ant-design/compatible';
 
 let _curIndex = null;
 
@@ -339,8 +340,8 @@ export default class ArrayFieldForm extends React.PureComponent {
               return this.handleChange (key, index)(value)
             }}
             rowData={{
-                index,
-                record
+              index,
+              record
             }}
           />
           

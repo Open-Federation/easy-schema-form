@@ -156,6 +156,7 @@ test('watchProps_deepProps', t=>{
 
 
 test.cb('watchProps_base',  t=>{
+  /*eslint no-unused-vars: "off"*/
   let num = 0;
   class App extends React.Component{
     static propTypes = {

@@ -207,7 +207,7 @@ export default class JsonSchemaForm extends React.PureComponent {
   }
 
   render () {
-    const {schema, dataPath, enableSumbit} = this.props;
+    const {className = '', schema, dataPath, enableSumbit} = this.props;
     const {store} = this.state;
     let C;
     if (schema.type === 'object') {
@@ -222,7 +222,7 @@ export default class JsonSchemaForm extends React.PureComponent {
 
     return (
       <GlobalStoreContext.Provider value={this.state}>
-        <div className="json-schema-form">
+        <div className={`json-schema-form ${className}`}>
           {
             <C
               dataPath={dataPath}
